@@ -101,9 +101,10 @@ def show_pokemon(request, pokemon_id):
             "title_ru": requested_pokemon.evolve_into.all().first().title,
             "pokemon_id": requested_pokemon.evolve_into.all().first().id,
             "img_url": request.build_absolute_uri(
-                            Pokemon.objects.get(
-                                id=requested_pokemon.evolve_into.all().first().id).image.url
-                        ),
+                Pokemon.objects.get(
+                    id=requested_pokemon.evolve_into.all().first().id
+                ).image.url
+            ),
         }
     return render(request, 'pokemon.html', context={
         'map': folium_map._repr_html_(), 'pokemon': pokemon

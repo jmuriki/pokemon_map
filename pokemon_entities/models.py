@@ -1,6 +1,6 @@
 from django.db import models  # noqa F401
 
-# your models here
+
 class Pokemon(models.Model):
     title = models.CharField(
         verbose_name="Название на русском",
