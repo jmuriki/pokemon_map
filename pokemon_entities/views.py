@@ -87,16 +87,16 @@ def show_pokemon(request, pokemon_id):
                 "lon": entity.lon,
             }
         )
-    previous_evolution_id = int(pokemon_id) - 1
-    if previous_evolution_id > 0:
+    try:
         pokemon["previous_evolution"] = {
-            "title_ru": Pokemon.objects.get(id=previous_evolution_id).title,
-            "pokemon_id": previous_evolution_id,
+            "title_ru": requested_pokemon.evolved_from.title,
+            "pokemon_id": requested_pokemon.evolved_from.id,
             "img_url": request.build_absolute_uri(
                             Pokemon.objects.get(
-                                id=previous_evolution_id).image.url
+                                id=requested_pokemon.evolved_from.id).image.url
                         ),
         }
-    return render(request, 'pokemon.html', context={
-        'map': folium_map._repr_html_(), 'pokemon': pokemon
-    })
+    finally:
+        return render(request, 'pokemon.html', context={
+            'map': folium_map._repr_html_(), 'pokemon': pokemon
+        })
