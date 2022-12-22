@@ -27,13 +27,13 @@ class Pokemon(models.Model):
         blank=True,
         max_length=200,
     )
-    evolved_from = models.ForeignKey(
+    previous_evolution = models.ForeignKey(
                         "self",
                         verbose_name="Эволюционный предшественник",
                         null=True,
                         blank=True,
                         on_delete=models.SET_NULL,
-                        related_name="evolve_into",
+                        related_name="next_evolution",
                     )
 
     def __str__(self):

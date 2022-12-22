@@ -82,22 +82,22 @@ def show_pokemon(request, pokemon_id):
                 "lon": entity.lon,
             }
         )
-    if requested_pokemon.evolved_from:
+    if requested_pokemon.previous_evolution:
         pokemon["previous_evolution"] = {
-            "title_ru": requested_pokemon.evolved_from.title,
-            "pokemon_id": requested_pokemon.evolved_from.id,
+            "title_ru": requested_pokemon.previous_evolution.title,
+            "pokemon_id": requested_pokemon.previous_evolution.id,
             "img_url": request.build_absolute_uri(
                             Pokemon.objects.get(
-                                id=requested_pokemon.evolved_from.id).image.url
+                                id=requested_pokemon.previous_evolution.id).image.url
                         ),
         }
-    if requested_pokemon.evolve_into.count():
+    if requested_pokemon.next_evolution.count():
         pokemon["next_evolution"] = {
-            "title_ru": requested_pokemon.evolve_into.all().first().title,
-            "pokemon_id": requested_pokemon.evolve_into.all().first().id,
+            "title_ru": requested_pokemon.next_evolution.all().first().title,
+            "pokemon_id": requested_pokemon.next_evolution.all().first().id,
             "img_url": request.build_absolute_uri(
                 Pokemon.objects.get(
-                    id=requested_pokemon.evolve_into.all().first().id
+                    id=requested_pokemon.next_evolution.all().first().id
                 ).image.url
             ),
         }
