@@ -87,18 +87,15 @@ def show_pokemon(request, pokemon_id):
             "title_ru": requested_pokemon.previous_evolution.title,
             "pokemon_id": requested_pokemon.previous_evolution.id,
             "img_url": request.build_absolute_uri(
-                            Pokemon.objects.get(
-                                id=requested_pokemon.previous_evolution.id).image.url
-                        ),
+                requested_pokemon.previous_evolution.image.url
+            ),
         }
     if requested_pokemon.next_evolution.first():
         pokemon["next_evolution"] = {
             "title_ru": requested_pokemon.next_evolution.all().first().title,
             "pokemon_id": requested_pokemon.next_evolution.all().first().id,
             "img_url": request.build_absolute_uri(
-                Pokemon.objects.get(
-                    id=requested_pokemon.next_evolution.all().first().id
-                ).image.url
+                requested_pokemon.next_evolution.all().first().image.url
             ),
         }
     return render(request, 'pokemon.html', context={
