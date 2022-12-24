@@ -9,6 +9,7 @@ class Pokemon(models.Model):
     image = models.ImageField(
         verbose_name="Изображение",
         null=True,
+        blank=True,
     )
     description = models.TextField(
         verbose_name="Описание",
