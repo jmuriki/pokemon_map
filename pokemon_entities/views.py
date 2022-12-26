@@ -95,8 +95,8 @@ def show_pokemon(request, pokemon_id):
             "pokemon_id": prev_evo.id,
             "img_url": request.build_absolute_uri(prev_evo_img_url),
         }
-    if requested_pokemon.next_evolution.first():
-        next_evo = requested_pokemon.next_evolution.first()
+    if requested_pokemon.next_evolutions.first():
+        next_evo = requested_pokemon.next_evolutions.first()
         next_evo_img_url = next_evo.image.url if next_evo.image \
             else DEFAULT_IMAGE_URL
         pokemon["next_evolution"] = {
